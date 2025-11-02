@@ -8,22 +8,37 @@
             display: flex;
             align-items: flex-start;
             margin-top: 30px;
+            gap: 60px;
+        }
+        .memo-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .side-title {
+            font-weight: bold;
+            margin-bottom: 8px;
         }
         .inputs-column {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-right: 20px;
+        }
+        .displays-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .memo-rows {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
         }
         .input-row {
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .display-column {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
         }
         .display-box {
             border: 1px solid #ccc;
@@ -33,7 +48,7 @@
             background: #f9f9f9;
         }
         .btn-box {
-            margin-left: 20px;
+            margin-top: 18px;
         }
         #modalOverlay {
             display: none;
@@ -56,18 +71,49 @@
             margin: 8px 20px 0 20px;
             min-width: 60px;
         }
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .memo-rows {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>수세 메모용</h1>
     <div class="container">
-        <!-- 입력 칸 19개 (기존 1개 + 추가 10개 + 추가 8개) -->
-        <div class="inputs-column">
-            <!-- JS로 생성, 기본값 있음 -->
+
+        <!-- 왼쪽 메모 그룹 -->
+        <div class="memo-group" id="leftMemoGroup">
+            <div class="side-title">왼쪽 메모</div>
+            <div class="memo-rows">
+                <div class="inputs-column" id="leftInputsColumn">
+                    <!-- JS로 생성 -->
+                </div>
+                <div class="displays-column" id="leftDisplaysColumn">
+                    <!-- JS로 생성 -->
+                </div>
+            </div>
         </div>
-        <div class="display-column" id="displayColumn">
-            <!-- JS로 생성, 기본값 있음 -->
+
+        <!-- 오른쪽 메모 그룹 -->
+        <div class="memo-group" id="rightMemoGroup">
+            <div class="side-title">오른쪽 메모</div>
+            <div class="memo-rows">
+                <div class="inputs-column" id="rightInputsColumn">
+                    <!-- JS로 생성 -->
+                </div>
+                <div class="displays-column" id="rightDisplaysColumn">
+                    <!-- JS로 생성 -->
+                </div>
+            </div>
         </div>
+
+        <!-- 초기화 버튼 -->
         <div class="btn-box">
             <button id="resetBtn">초기화</button>
         </div>
@@ -81,55 +127,66 @@
         </div>
     </div>
     <script>
-        // 입력창 19개 생성
+        // 입력창 19개 생성 (1+10+8)
         const NUM_MEMO = 19;
-        const localStorageKey = idx => `memoValue${idx}`;
-        const inputsColumn = document.querySelector('.inputs-column');
-        const displayColumn = document.getElementById('displayColumn');
-        let memoInputs = [];
-        let memoDisplays = [];
 
-        // 동적 생성
-        for (let i = 0; i < NUM_MEMO; i++) {
-            // 입력
-            const inputRow = document.createElement('div');
-            inputRow.className = 'input-row';
+        // 입력창/출력박스 DOM 참조
+        const leftInputsColumn   = document.getElementById('leftInputsColumn');
+        const leftDisplaysColumn = document.getElementById('leftDisplaysColumn');
+        const rightInputsColumn  = document.getElementById('rightInputsColumn');
+        const rightDisplaysColumn= document.getElementById('rightDisplaysColumn');
 
-            const label = document.createElement('label');
-            label.textContent = `메모${i+1}`;
-            label.htmlFor = `memoInput${i}`;
-            label.style.minWidth = '48px';
+        let leftMemoInputs = [], leftMemoDisplays = [];
+        let rightMemoInputs = [], rightMemoDisplays = [];
 
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.id = `memoInput${i}`;
-            input.placeholder = `메모를 입력하세요`;
-            input.autocomplete = 'off';
+        // 왼쪽, 오른쪽 각각에 대해 생성
+        for (let side of ['left', 'right']) {
+            const inputsArr = side === 'left' ? leftMemoInputs : rightMemoInputs;
+            const displaysArr = side === 'left' ? leftMemoDisplays : rightMemoDisplays;
+            const inputsCol = side === 'left' ? leftInputsColumn : rightInputsColumn;
+            const displaysCol = side === 'left' ? leftDisplaysColumn : rightDisplaysColumn;
+            for (let i = 0; i < NUM_MEMO; i++) {
+                // 키 생성 (localStorage key)
+                function genKey(idx) { return `memoValue_${side}_${idx}`; }
 
-            inputRow.appendChild(label);
-            inputRow.appendChild(input);
-            inputsColumn.appendChild(inputRow);
+                // 입력 칸과 라벨
+                const inputRow = document.createElement('div');
+                inputRow.className = 'input-row';
 
-            memoInputs.push(input);
+                const label = document.createElement('label');
+                label.textContent = `메모${i+1}`;
+                label.htmlFor = `${side}MemoInput${i}`;
+                label.style.minWidth = '48px';
 
-            // 표시 박스
-            const displayBox = document.createElement('div');
-            displayBox.className = 'display-box';
-            displayBox.id = `memoDisplay${i}`;
-            displayColumn.appendChild(displayBox);
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = `${side}MemoInput${i}`;
+                input.placeholder = `메모를 입력하세요`;
+                input.autocomplete = 'off';
 
-            memoDisplays.push(displayBox);
+                inputRow.appendChild(label);
+                inputRow.appendChild(input);
+                inputsCol.appendChild(inputRow);
+                inputsArr.push(input);
 
-            // localStorage 값 불러오기
-            const savedValue = localStorage.getItem(localStorageKey(i)) || '';
-            input.value = savedValue;
-            displayBox.textContent = savedValue;
+                // 박스
+                const displayBox = document.createElement('div');
+                displayBox.className = 'display-box';
+                displayBox.id = `${side}MemoDisplay${i}`;
+                displaysCol.appendChild(displayBox);
+                displaysArr.push(displayBox);
 
-            // 입력 이벤트 연결
-            input.addEventListener('input', function() {
-                displayBox.textContent = input.value;
-                localStorage.setItem(localStorageKey(i), input.value);
-            });
+                // 로컬 스토리지 적용
+                const savedValue = localStorage.getItem(genKey(i)) || '';
+                input.value = savedValue;
+                displayBox.textContent = savedValue;
+
+                // 입력 이벤트
+                input.addEventListener('input', function() {
+                    displayBox.textContent = input.value;
+                    localStorage.setItem(genKey(i), input.value);
+                });
+            }
         }
 
         // 초기화 및 모달
@@ -143,11 +200,15 @@
         });
 
         yesBtn.addEventListener('click', function() {
-            // 입력값 및 박스 초기화, localStorage 초기화
-            for (let i = 0; i < NUM_MEMO; i++) {
-                memoInputs[i].value = '';
-                memoDisplays[i].textContent = '';
-                localStorage.removeItem(localStorageKey(i));
+            // 왼쪽/오른쪽 모두 초기화
+            for (let side of ['left', 'right']) {
+                const inputsArr = side === 'left' ? leftMemoInputs : rightMemoInputs;
+                const displaysArr = side === 'left' ? leftMemoDisplays : rightMemoDisplays;
+                for (let i = 0; i < NUM_MEMO; i++) {
+                    inputsArr[i].value = '';
+                    displaysArr[i].textContent = '';
+                    localStorage.removeItem(`memoValue_${side}_${i}`);
+                }
             }
             modalOverlay.style.display = 'none';
         });
@@ -169,6 +230,7 @@
     </script>
 </body>
 </html>
+
 
 
 
