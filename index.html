@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>수세 메모용 2</title>
+    <title>수세 메모용</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
@@ -276,134 +276,12 @@
         </div>
     </div>
     <script>
-        // 입력창 19개 (1+10+8)
-        const NUM_MEMO = 19;
+        // 입력창 12개
+        const NUM_MEMO = 12;
 
         // DOM 참조
-        const allInputsColumn = document.getElementById('allInputsColumn');
-        const resultBox = document.getElementById('resultBox');
 
-        let memoInputs = [];
 
-        // 입력 칸 동적으로 생성
-        for (let i = 0; i < NUM_MEMO; i++) {
-            // 키 생성 (localStorage key)
-            function genKey(idx) { return `memoValue_all_${idx}`; }
-
-            // 입력 칸과 라벨
-            const inputRow = document.createElement('div');
-            inputRow.className = 'input-row';
-
-            const label = document.createElement('label');
-            label.textContent = `메모${i+1}`;
-            label.htmlFor = `allMemoInput${i}`;
-            label.style.minWidth = '42px';
-
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.id = `allMemoInput${i}`;
-            input.placeholder = `메모 입력`;
-            input.autocomplete = 'off';
-            input.inputMode = 'text';
-
-            inputRow.appendChild(label);
-            inputRow.appendChild(input);
-            allInputsColumn.appendChild(inputRow);
-            memoInputs.push(input);
-
-            // localStorage 적용
-            const savedValue = localStorage.getItem(genKey(i)) || '';
-            input.value = savedValue;
-
-            // 입력 이벤트
-            input.addEventListener('input', function() {
-                localStorage.setItem(genKey(i), input.value);
-                renderResult();
-            });
-
-            // iOS 키보드 개선 위해 enter 시 키보드 숨김
-            input.addEventListener('keydown', function(e){
-                if(e.key==='Enter') {
-                    input.blur();
-                }
-            });
-        }
-
-        // 결과 출력
-        function renderResult() {
-            // 입력된 값들을 모두 취합(빈 값 제외)
-            const memos = memoInputs.map(i => i.value).filter(v=>v.trim().length>0);
-            resultBox.innerHTML = memos.length > 0
-                ? memos.map((v,i)=> `<div><b>${i+1}.</b> ${v}</div>`).join('')
-                : "<span style='color:#bdcbe1;'>입력된 메모가 없습니다.</span>";
-        }
-
-        // 최초 렌더링
-        renderResult();
-
-        // 초기화 및 모달
-        const resetBtn = document.getElementById('resetBtn');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-
-        resetBtn.addEventListener('click', function() {
-            modalOverlay.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
-
-        yesBtn.addEventListener('click', function() {
-            // 모든 메모 칸 초기화
-            for(let i=0;i<NUM_MEMO;i++) {
-                memoInputs[i].value = '';
-                localStorage.removeItem(`memoValue_all_${i}`);
-            }
-            renderResult();
-            modalOverlay.style.display = 'none';
-            document.body.style.overflow = '';
-        });
-
-        noBtn.addEventListener('click', function() {
-            modalOverlay.style.display = 'none';
-            document.body.style.overflow = '';
-        });
-
-        modalOverlay.addEventListener('click', function(e) {
-            if (e.target === modalOverlay) {
-                modalOverlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-        window.addEventListener('keydown', function(e) {
-            if (modalOverlay.style.display === 'block' && e.key === 'Escape') {
-                modalOverlay.style.display = 'none';
-                document.body.style.overflow = '';
-            }
-        });
-
-        // 모바일에서 박스 간격 조정/자동 scrollIntoView
-        function adjustForMobile() {
-            if(window.innerWidth <= 900) {
-                document.querySelectorAll('input[type="text"]').forEach(inp => {
-                    inp.addEventListener('focus', function(){
-                        setTimeout(function() {
-                            inp.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-                        }, 210);
-                    });
-                });
-            }
-        }
-        adjustForMobile();
-        window.addEventListener('resize', adjustForMobile);
-
-        // 입력값 변동시 결과 갱신
-        memoInputs.forEach(input => {
-            input.addEventListener('input', renderResult);
-        });
-
-    </script>
-</body>
-</html>
 
 
 
