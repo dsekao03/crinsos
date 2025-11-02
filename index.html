@@ -41,13 +41,18 @@
       flex-direction: column;
       gap: 12px;
     }
+    label {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: #444;
+    }
     .memoline {
       display: flex;
       align-items: center;
       gap: 6px;
       margin-bottom: 2px;
     }
-    input[type="text"], input[type="number"] {
+    input[type="text"] {
       padding: 2px 3px;
       border: 1px solid #bbb;
       border-radius: 4px;
@@ -59,7 +64,7 @@
       width: 70px;
       box-sizing: border-box;
     }
-    input[type="text"]:focus, input[type="number"]:focus {
+    input[type="text"]:focus {
       border: 1.5px solid #7a77ee;
     }
     input[type="checkbox"].memocheck {
@@ -70,6 +75,11 @@
       margin-right: 2px;
       vertical-align: middle;
       flex-shrink: 0;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 10px;
     }
     button {
       padding: 6px 15px;
@@ -90,6 +100,7 @@
       justify-content: center;
       margin-top: 25px;
       margin-bottom: -15px;
+      /* 버튼과 헤딩 중앙 사이 조정 */
     }
     .reset-top-center-wrap button {
       font-size: 1.045rem;
@@ -144,7 +155,7 @@
       h1 {
         font-size: 1.4rem;
       }
-      input[type="text"], input[type="number"] {
+      input[type="text"] {
         font-size: 0.86rem;
         padding: 2px 3px;
         height: 20px;
@@ -167,10 +178,6 @@
         height: 19px;
       }
     }
-    /* 라벨 제거 padding 여백 */
-    .memoline label {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -184,54 +191,65 @@
       <div class="memoinput-group">
         <div class="group-title">건조 1 ~ 5</div>
         <div class="memoline">
-          <input type="number" id="memo1" autocomplete="off">
+          <label for="memo1">건조 1</label>
+          <input type="text" id="memo1" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check1">
         </div>
         <div class="memoline">
-          <input type="number" id="memo2" autocomplete="off">
+          <label for="memo2">건조 2</label>
+          <input type="text" id="memo2" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check2">
         </div>
         <div class="memoline">
-          <input type="number" id="memo3" autocomplete="off">
+          <label for="memo3">건조 3</label>
+          <input type="text" id="memo3" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check3">
         </div>
         <div class="memoline">
-          <input type="number" id="memo4" autocomplete="off">
+          <label for="memo4">건조 4</label>
+          <input type="text" id="memo4" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check4">
         </div>
         <div class="memoline">
-          <input type="number" id="memo5" autocomplete="off">
+          <label for="memo5">건조 5</label>
+          <input type="text" id="memo5" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check5">
         </div>
       </div>
       <div class="memoinput-group">
-        <div class="group-title">배합 6 ~ 10</div>
+        <div class="group-title">메모 6 ~ 10</div>
         <div class="memoline">
-          <input type="number" id="memo6" autocomplete="off">
+          <label for="memo6">메모 6</label>
+          <input type="text" id="memo6" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check6">
         </div>
         <div class="memoline">
-          <input type="number" id="memo7" autocomplete="off">
+          <label for="memo7">메모 7</label>
+          <input type="text" id="memo7" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check7">
         </div>
         <div class="memoline">
-          <input type="number" id="memo8" autocomplete="off">
+          <label for="memo8">메모 8</label>
+          <input type="text" id="memo8" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check8">
         </div>
         <div class="memoline">
-          <input type="number" id="memo9" autocomplete="off">
+          <label for="memo9">메모 9</label>
+          <input type="text" id="memo9" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check9">
         </div>
         <div class="memoline">
-          <input type="number" id="memo10" autocomplete="off">
+          <label for="memo10">메모 10</label>
+          <input type="text" id="memo10" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check10">
         </div>
       </div>
+      <!-- actions div 제거됨(초기화 버튼 분리됨) -->
     </div>
 
     <!-- 결과 박스 (모든 입력 메모 표시, 우측 고정) -->
     <div class="memo-section">
-      <div class="group-title">A 결과</div>
+      <div class="group-title">메모 결과</div>
       <div class="result-area" id="resultArea"></div>
     </div>
 
@@ -240,46 +258,56 @@
       <div class="memoinput-group">
         <div class="group-title">건조 11 ~ 15</div>
         <div class="memoline">
-          <input type="number" id="memo11" autocomplete="off">
+          <label for="memo11">건조 11</label>
+          <input type="text" id="memo11" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check11">
         </div>
         <div class="memoline">
-          <input type="number" id="memo12" autocomplete="off">
+          <label for="memo12">건조 12</label>
+          <input type="text" id="memo12" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check12">
         </div>
         <div class="memoline">
-          <input type="number" id="memo13" autocomplete="off">
+          <label for="memo13">건조 13</label>
+          <input type="text" id="memo13" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check13">
         </div>
         <div class="memoline">
-          <input type="number" id="memo14" autocomplete="off">
+          <label for="memo14">건조 14</label>
+          <input type="text" id="memo14" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check14">
         </div>
         <div class="memoline">
-          <input type="number" id="memo15" autocomplete="off">
+          <label for="memo15">건조 15</label>
+          <input type="text" id="memo15" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check15">
         </div>
       </div>
       <div class="memoinput-group">
-        <div class="group-title">배합 16 ~ 20</div>
+        <div class="group-title">메모 16 ~ 20</div>
         <div class="memoline">
-          <input type="number" id="memo16" autocomplete="off">
+          <label for="memo16">메모 16</label>
+          <input type="text" id="memo16" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check16">
         </div>
         <div class="memoline">
-          <input type="number" id="memo17" autocomplete="off">
+          <label for="memo17">메모 17</label>
+          <input type="text" id="memo17" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check17">
         </div>
         <div class="memoline">
-          <input type="number" id="memo18" autocomplete="off">
+          <label for="memo18">메모 18</label>
+          <input type="text" id="memo18" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check18">
         </div>
         <div class="memoline">
-          <input type="number" id="memo19" autocomplete="off">
+          <label for="memo19">메모 19</label>
+          <input type="text" id="memo19" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check19">
         </div>
         <div class="memoline">
-          <input type="number" id="memo20" autocomplete="off">
+          <label for="memo20">메모 20</label>
+          <input type="text" id="memo20" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check20">
         </div>
       </div>
@@ -287,7 +315,7 @@
 
     <!-- 결과 박스 2 -->
     <div class="memo-section">
-      <div class="group-title">B 결과2</div>
+      <div class="group-title">메모 결과2</div>
       <div class="result-area" id="resultArea2"></div>
     </div>
 
@@ -296,46 +324,56 @@
       <div class="memoinput-group">
         <div class="group-title">건조 21 ~ 25</div>
         <div class="memoline">
-          <input type="number" id="memo21" autocomplete="off">
+          <label for="memo21">건조 21</label>
+          <input type="text" id="memo21" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check21">
         </div>
         <div class="memoline">
-          <input type="number" id="memo22" autocomplete="off">
+          <label for="memo22">건조 22</label>
+          <input type="text" id="memo22" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check22">
         </div>
         <div class="memoline">
-          <input type="number" id="memo23" autocomplete="off">
+          <label for="memo23">건조 23</label>
+          <input type="text" id="memo23" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check23">
         </div>
         <div class="memoline">
-          <input type="number" id="memo24" autocomplete="off">
+          <label for="memo24">건조 24</label>
+          <input type="text" id="memo24" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check24">
         </div>
         <div class="memoline">
-          <input type="number" id="memo25" autocomplete="off">
+          <label for="memo25">건조 25</label>
+          <input type="text" id="memo25" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check25">
         </div>
       </div>
       <div class="memoinput-group">
-        <div class="group-title">배합 26 ~ 30</div>
+        <div class="group-title">메모 26 ~ 30</div>
         <div class="memoline">
-          <input type="number" id="memo26" autocomplete="off">
+          <label for="memo26">메모 26</label>
+          <input type="text" id="memo26" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check26">
         </div>
         <div class="memoline">
-          <input type="number" id="memo27" autocomplete="off">
+          <label for="memo27">메모 27</label>
+          <input type="text" id="memo27" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check27">
         </div>
         <div class="memoline">
-          <input type="number" id="memo28" autocomplete="off">
+          <label for="memo28">메모 28</label>
+          <input type="text" id="memo28" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check28">
         </div>
         <div class="memoline">
-          <input type="number" id="memo29" autocomplete="off">
+          <label for="memo29">메모 29</label>
+          <input type="text" id="memo29" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check29">
         </div>
         <div class="memoline">
-          <input type="number" id="memo30" autocomplete="off">
+          <label for="memo30">메모 30</label>
+          <input type="text" id="memo30" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check30">
         </div>
       </div>
@@ -343,7 +381,7 @@
 
     <!-- 결과 박스 3 -->
     <div class="memo-section">
-      <div class="group-title">C 결과3</div>
+      <div class="group-title">메모 결과3</div>
       <div class="result-area" id="resultArea3"></div>
     </div>
   </div>
@@ -462,10 +500,9 @@
         }
         saveAll();
       }
+      // 아니오: 아무 일도 없음
     });
 
   </script>
 </body>
 </html>
-
-  
