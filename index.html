@@ -1,10 +1,12 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>수세 메모용 3333322</title>
+  <title>수세 메모용</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -48,14 +50,18 @@
       color: #444;
     }
     input[type="text"] {
-      padding: 8px;
+      padding: 4px 6px;
       border: 1px solid #bbb;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 0.89rem;
       outline: none;
       margin-bottom: 2px;
       background: #f8f8fc;
       transition: border 0.2s;
+      height: 28px;
+      /* 폭도 작게: 최대한 줄이기(폭 자동조정) */
+      /* min-width: 60px; */
+      /* width: 100%;  // 모바일에서 늘어지도록 놔둠 */
     }
     input[type="text"]:focus {
       border: 1.5px solid #7a77ee;
@@ -66,8 +72,8 @@
       margin-top: 10px;
     }
     button {
-      padding: 8px 20px;
-      font-size: 1rem;
+      padding: 6px 15px;
+      font-size: 0.98rem;
       border-radius: 5px;
       border: none;
       background: #7a77ee;
@@ -119,10 +125,19 @@
       }
       .memo-section {
         padding: 1rem 0.7rem 1.2rem 0.7rem;
-        font-size: 0.98rem;
+        font-size: 0.97rem;
       }
       h1 {
         font-size: 1.4rem;
+      }
+      input[type="text"] {
+        font-size: 0.97rem;
+        padding: 7px 7px;
+        height: 32px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 8px 20px;
       }
     }
   </style>
@@ -158,7 +173,7 @@
       <div class="memoinput-group">
         <div class="group-title">메모 6 ~ 10</div>
         <div>
-          <label for="memo6">배합 1</label>
+          <label for="memo6">메모 6</label>
           <input type="text" id="memo6" autocomplete="off">
         </div>
         <div>
@@ -178,8 +193,20 @@
           <input type="text" id="memo10" autocomplete="off">
         </div>
       </div>
+      <div class="memoinput-group">
+        <div class="group-title">메모 11 ~ 12</div>
+        <div>
+          <label for="memo11">메모 11</label>
+          <input type="text" id="memo11" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo12">메모 12</label>
+          <input type="text" id="memo12" autocomplete="off">
+        </div>
+      </div>
       <div class="actions">
         <button id="resetBtn">초기화</button>
+      </div>
     </div>
 
     <!-- 결과 박스 (모든 입력 메모 표시, 우측 고정) -->
@@ -193,11 +220,13 @@
     // 메모 필드 id 배열
     const memoIds = [
       "memo1", "memo2", "memo3", "memo4", "memo5",
-      "memo6", "memo7", "memo8", "memo9", "memo10"
+      "memo6", "memo7", "memo8", "memo9", "memo10",
+      "memo11", "memo12"
     ];
 
     // 건조 1 ~ 5 필드명 배열 (라벨링 용)
-    const dryMemoIds = ["memo1", "memo2", "memo3", "memo4", "memo5", "memo6"];
+    const dryMemoIds = ["memo1", "memo2", "memo3", "memo4", "memo5"];
+
     // 데이터베이스: localStorage 사용
     function saveMemosToDB(memos) {
       localStorage.setItem('suse_memo_data', JSON.stringify(memos));
