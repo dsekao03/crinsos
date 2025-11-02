@@ -1,8 +1,4 @@
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,13 +46,18 @@
       margin-bottom: 4px;
       color: #444;
     }
+    .memoline {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
     input[type="text"] {
       padding: 2px 3px;
       border: 1px solid #bbb;
       border-radius: 4px;
       font-size: 0.82rem;
       outline: none;
-      margin-bottom: 2px;
       background: #f8f8fc;
       transition: border 0.2s;
       height: 20px;
@@ -65,6 +66,15 @@
     }
     input[type="text"]:focus {
       border: 1.5px solid #7a77ee;
+    }
+    input[type="checkbox"].memocheck {
+      width: 15px;
+      height: 15px;
+      accent-color: #7a77ee;
+      margin-left: 3px;
+      margin-right: 2px;
+      vertical-align: middle;
+      flex-shrink: 0;
     }
     .actions {
       display: flex;
@@ -94,7 +104,7 @@
     }
     .reset-top-center-wrap button {
       font-size: 1.045rem;
-      padding: 4px 20px;
+      padding: 7px 25px;
       border-radius: 26px;
       box-shadow: 0 2px 8px #eaeafe;
       background: #7a77ee;
@@ -163,6 +173,10 @@
         margin-top: 12px;
         margin-bottom: -6px;
       }
+      input[type="checkbox"].memocheck {
+        width: 19px;
+        height: 19px;
+      }
     }
   </style>
 </head>
@@ -170,53 +184,64 @@
   <div class="reset-top-center-wrap">
     <button id="resetBtn">초기화</button>
   </div>
+  <h1>수세 메모용</h1>
   <div class="container">
     <!-- 좌측 메모입력란 -->
     <div class="memo-section" id="memoSection1">
       <div class="memoinput-group">
         <div class="group-title">건조 1 ~ 5</div>
-        <div>
+        <div class="memoline">
           <label for="memo1">건조 1</label>
           <input type="text" id="memo1" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check1">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo2">건조 2</label>
           <input type="text" id="memo2" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check2">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo3">건조 3</label>
           <input type="text" id="memo3" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check3">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo4">건조 4</label>
           <input type="text" id="memo4" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check4">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo5">건조 5</label>
           <input type="text" id="memo5" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check5">
         </div>
       </div>
       <div class="memoinput-group">
         <div class="group-title">메모 6 ~ 10</div>
-        <div>
+        <div class="memoline">
           <label for="memo6">메모 6</label>
           <input type="text" id="memo6" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check6">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo7">메모 7</label>
           <input type="text" id="memo7" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check7">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo8">메모 8</label>
           <input type="text" id="memo8" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check8">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo9">메모 9</label>
           <input type="text" id="memo9" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check9">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo10">메모 10</label>
           <input type="text" id="memo10" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check10">
         </div>
       </div>
       <!-- actions div 제거됨(초기화 버튼 분리됨) -->
@@ -232,48 +257,58 @@
     <div class="memo-section" id="memoSection2">
       <div class="memoinput-group">
         <div class="group-title">건조 11 ~ 15</div>
-        <div>
+        <div class="memoline">
           <label for="memo11">건조 11</label>
           <input type="text" id="memo11" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check11">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo12">건조 12</label>
           <input type="text" id="memo12" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check12">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo13">건조 13</label>
           <input type="text" id="memo13" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check13">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo14">건조 14</label>
           <input type="text" id="memo14" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check14">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo15">건조 15</label>
           <input type="text" id="memo15" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check15">
         </div>
       </div>
       <div class="memoinput-group">
         <div class="group-title">메모 16 ~ 20</div>
-        <div>
+        <div class="memoline">
           <label for="memo16">메모 16</label>
           <input type="text" id="memo16" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check16">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo17">메모 17</label>
           <input type="text" id="memo17" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check17">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo18">메모 18</label>
           <input type="text" id="memo18" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check18">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo19">메모 19</label>
           <input type="text" id="memo19" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check19">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo20">메모 20</label>
           <input type="text" id="memo20" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check20">
         </div>
       </div>
     </div>
@@ -288,48 +323,58 @@
     <div class="memo-section" id="memoSection3">
       <div class="memoinput-group">
         <div class="group-title">건조 21 ~ 25</div>
-        <div>
+        <div class="memoline">
           <label for="memo21">건조 21</label>
           <input type="text" id="memo21" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check21">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo22">건조 22</label>
           <input type="text" id="memo22" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check22">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo23">건조 23</label>
           <input type="text" id="memo23" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check23">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo24">건조 24</label>
           <input type="text" id="memo24" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check24">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo25">건조 25</label>
           <input type="text" id="memo25" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check25">
         </div>
       </div>
       <div class="memoinput-group">
         <div class="group-title">메모 26 ~ 30</div>
-        <div>
+        <div class="memoline">
           <label for="memo26">메모 26</label>
           <input type="text" id="memo26" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check26">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo27">메모 27</label>
           <input type="text" id="memo27" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check27">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo28">메모 28</label>
           <input type="text" id="memo28" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check28">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo29">메모 29</label>
           <input type="text" id="memo29" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check29">
         </div>
-        <div>
+        <div class="memoline">
           <label for="memo30">메모 30</label>
           <input type="text" id="memo30" autocomplete="off">
+          <input type="checkbox" class="memocheck" id="check30">
         </div>
       </div>
     </div>
@@ -351,6 +396,15 @@
       "memo21", "memo22", "memo23", "memo24", "memo25",
       "memo26", "memo27", "memo28", "memo29", "memo30"
     ];
+    // 체크박스 id 배열 (1~30)
+    const checkIds = [
+      "check1","check2","check3","check4","check5",
+      "check6","check7","check8","check9","check10",
+      "check11","check12","check13","check14","check15",
+      "check16","check17","check18","check19","check20",
+      "check21","check22","check23","check24","check25",
+      "check26","check27","check28","check29","check30"
+    ];
 
     // 각 메모 그룹의 시작 인덱스와 타이틀 정보
     const groups = [
@@ -359,12 +413,18 @@
       {start: 20,  end: 29,  resultArea: 'resultArea3',  dryLabel: "건조", memoLabel: "배합"},
     ];
 
-    // DB Save/Load (전체 30)
-    function saveMemosToDB(memos) {
+    // DB Save/Load (전체 30 + 체크박스)
+    function saveMemosToDB(memos, checks) {
       localStorage.setItem('suse_memo_data_v3', JSON.stringify(memos));
+      localStorage.setItem('suse_memo_check_v3', JSON.stringify(checks));
     }
     function loadMemosFromDB() {
       const val = localStorage.getItem('suse_memo_data_v3');
+      if (val) return JSON.parse(val);
+      return {};
+    }
+    function loadChecksFromDB() {
+      const val = localStorage.getItem('suse_memo_check_v3');
       if (val) return JSON.parse(val);
       return {};
     }
@@ -376,6 +436,7 @@
         let resHtml = "";
         for (let i = group.start; i <= group.end; i++) {
           const val = document.getElementById(memoIds[i]).value.trim();
+          const checked = document.getElementById(checkIds[i]).checked;
           if (val) {
             let labelText;
             if (i - group.start < 5) {
@@ -383,7 +444,7 @@
             } else {
               labelText = `${group.memoLabel} ${(i-group.start)-4}`;
             }
-            resHtml += `<div><b>${labelText}:</b> ${val}</div>`;
+            resHtml += `<div><b>${labelText}:</b> ${val} ${checked ? "<span style='color:#635;font-size:0.98em;'>&#10003;</span>" : ""}</div>`;
           }
         }
         document.getElementById(group.resultArea).innerHTML = resHtml || "<div style='color:#aaa'>입력된 메모가 없습니다.</div>";
@@ -393,23 +454,28 @@
     // 입력값 저장
     function saveAll() {
       let memos = {};
-      for (let id of memoIds) {
-        memos[id] = document.getElementById(id).value;
+      let checks = {};
+      for (let i = 0; i < memoIds.length; i++) {
+        memos[memoIds[i]] = document.getElementById(memoIds[i]).value;
+        checks[checkIds[i]] = document.getElementById(checkIds[i]).checked ? 1 : 0;
       }
-      saveMemosToDB(memos);
+      saveMemosToDB(memos, checks);
       updateResultArea();
     }
 
     // 이벤트 연결
-    for (let id of memoIds) {
-      document.getElementById(id).addEventListener('input', saveAll);
+    for (let i = 0; i < memoIds.length; i++) {
+      document.getElementById(memoIds[i]).addEventListener('input', saveAll);
+      document.getElementById(checkIds[i]).addEventListener('change', saveAll);
     }
 
     // 초기 로딩
     function loadAll() {
       const memos = loadMemosFromDB();
-      for (let id of memoIds) {
-        document.getElementById(id).value = memos[id] || "";
+      const checks = loadChecksFromDB();
+      for (let i = 0; i < memoIds.length; i++) {
+        document.getElementById(memoIds[i]).value = memos[memoIds[i]] || "";
+        document.getElementById(checkIds[i]).checked = (checks[checkIds[i]] == 1);
       }
       updateResultArea();
     }
@@ -428,8 +494,9 @@
           alert("비밀번호가 일치하지 않습니다. 초기화가 취소됩니다.");
           return;
         }
-        for (let id of memoIds) {
-          document.getElementById(id).value = "";
+        for (let i = 0; i < memoIds.length; i++) {
+          document.getElementById(memoIds[i]).value = "";
+          document.getElementById(checkIds[i]).checked = false;
         }
         saveAll();
       }
@@ -439,13 +506,4 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
