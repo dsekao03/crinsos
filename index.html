@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -132,24 +133,25 @@
     <!-- 좌측 메모입력란 -->
     <div class="memo-section" id="memoSection1">
       <div class="memoinput-group">
+        <div class="group-title">건조 1 ~ 5</div>
         <div>
-          <label for="memo1">건조1</label>
+          <label for="memo1">건조 1</label>
           <input type="text" id="memo1" autocomplete="off">
         </div>
         <div>
-          <label for="memo2">건조2</label>
+          <label for="memo2">건조 2</label>
           <input type="text" id="memo2" autocomplete="off">
         </div>
         <div>
-          <label for="memo3">건조33</label>
+          <label for="memo3">건조 3</label>
           <input type="text" id="memo3" autocomplete="off">
         </div>
         <div>
-          <label for="memo4">메모 4</label>
+          <label for="memo4">건조 4</label>
           <input type="text" id="memo4" autocomplete="off">
         </div>
         <div>
-          <label for="memo5">메모 5</label>
+          <label for="memo5">건조 5</label>
           <input type="text" id="memo5" autocomplete="off">
         </div>
       </div>
@@ -176,20 +178,8 @@
           <input type="text" id="memo10" autocomplete="off">
         </div>
       </div>
-      <div class="memoinput-group">
-        <div class="group-title">메모 11 ~ 12</div>
-        <div>
-          <label for="memo11">메모 11</label>
-          <input type="text" id="memo11" autocomplete="off">
-        </div>
-        <div>
-          <label for="memo12">메모 12</label>
-          <input type="text" id="memo12" autocomplete="off">
-        </div>
-      </div>
       <div class="actions">
         <button id="resetBtn">초기화</button>
-      </div>
     </div>
 
     <!-- 결과 박스 (모든 입력 메모 표시, 우측 고정) -->
@@ -203,9 +193,11 @@
     // 메모 필드 id 배열
     const memoIds = [
       "memo1", "memo2", "memo3", "memo4", "memo5",
-      "memo6", "memo7", "memo8", "memo9", "memo10",
-      "memo11", "memo12"
+      "memo6", "memo7", "memo8", "memo9", "memo10"
     ];
+
+    // 건조 1 ~ 5 필드명 배열 (라벨링 용)
+    const dryMemoIds = ["memo1", "memo2", "memo3", "memo4", "memo5"];
 
     // 데이터베이스: localStorage 사용
     function saveMemosToDB(memos) {
@@ -223,7 +215,13 @@
       for (let i = 0; i < memoIds.length; i++) {
         const val = document.getElementById(memoIds[i]).value.trim();
         if (val) {
-          resHtml += `<div><b>메모 ${i+1}:</b> ${val}</div>`;
+          let labelText;
+          if (i < 5) {
+            labelText = `건조 ${i+1}`;
+          } else {
+            labelText = `메모 ${i+1}`;
+          }
+          resHtml += `<div><b>${labelText}:</b> ${val}</div>`;
         }
       }
       document.getElementById('resultArea').innerHTML = resHtml || "<div style='color:#aaa'>입력된 메모가 없습니다.</div>";
