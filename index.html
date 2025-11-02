@@ -21,29 +21,29 @@
       justify-content: center;
       align-items: flex-start;
       gap: 2rem;
-      margin: 20px 10px;
+      margin: 40px 10px;
     }
     .memo-section {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 12px #ddd;
-      padding: 1.5rem 1rem 1rem 1rem;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
       width: 160px;
       min-width: 160px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 20px;
     }
     h1 {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       letter-spacing: -2px;
     }
     .memoinput-group {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 12px;
     }
     label {
       font-size: 1.05rem;
@@ -51,7 +51,7 @@
       color: #444;
     }
     input[type="text"] {
-      padding: 2px 3px; /* 작게 줄임 */
+      padding: 2px 3px;
       border: 1px solid #bbb;
       border-radius: 4px;
       font-size: 0.82rem;
@@ -59,8 +59,8 @@
       margin-bottom: 2px;
       background: #f8f8fc;
       transition: border 0.2s;
-      height: 20px; /* 작게 줄임 */
-      width: 70px;  /* 입력창 폭 줄임 */
+      height: 20px;
+      width: 70px;
       box-sizing: border-box;
     }
     input[type="text"]:focus {
@@ -84,11 +84,26 @@
     button:hover {
       background: #5956d2;
     }
+    .reset-top-center-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      margin-bottom: -15px;
+      /* 버튼과 헤딩 중앙 사이 조정 */
+    }
+    .reset-top-center-wrap button {
+      font-size: 1.045rem;
+      padding: 7px 25px;
+      border-radius: 26px;
+      box-shadow: 0 2px 8px #eaeafe;
+      background: #7a77ee;
+    }
     .result-area {
       padding: 1rem;
       border-radius: 8px;
-      min-height: 70px;
-      margin-top: 5px;
+      min-height: 100px;
+      margin-top: 10px;
       background: #fafbfc;
       box-shadow: 0 1px 6px #eee;
       color: #222;
@@ -98,10 +113,10 @@
     .group-title {
       font-weight: bold;
       color: #325;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       font-size: 1.08rem;
       letter-spacing: -1px;
-      margin-top: 5px;
+      margin-top: 10px;
     }
 
     @media (max-width: 950px) {
@@ -140,10 +155,21 @@
         font-size: 1rem;
         padding: 8px 20px;
       }
+      .reset-top-center-wrap button {
+        font-size: 1rem;
+        padding: 8px 26px;
+      }
+      .reset-top-center-wrap {
+        margin-top: 12px;
+        margin-bottom: -6px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="reset-top-center-wrap">
+    <button id="resetBtn">초기화</button>
+  </div>
   <h1>수세 메모용</h1>
   <div class="container">
     <!-- 좌측 메모입력란 -->
@@ -194,9 +220,7 @@
           <input type="text" id="memo10" autocomplete="off">
         </div>
       </div>
-      <div class="actions">
-        <button id="resetBtn">초기화</button>
-      </div>
+      <!-- actions div 제거됨(초기화 버튼 분리됨) -->
     </div>
 
     <!-- 결과 박스 (모든 입력 메모 표시, 우측 고정) -->
@@ -392,13 +416,13 @@
     }
     loadAll();
 
-    // 초기화 (맨 처음 그룹의 버튼만 있음)
+    // 초기화 (맨위 버튼)
     document.getElementById('resetBtn').addEventListener('click', function() {
       const confirmed = window.confirm("박스 안에 있는 모든 내용이 초기화 됩니다. 계속하시겠습니까?");
       if (confirmed) {
         const password = window.prompt("초기화를 위해 비밀번호 4자리를 입력하세요.", "");
         if (password === null) {
-          // 취소 눌렀을 때
+          // 취소
           return;
         }
         if (password !== "6318") {
@@ -410,7 +434,7 @@
         }
         saveAll();
       }
-      // 아니오: 아무 일도 없음(메세지 창만 닫힘)
+      // 아니오: 아무 일도 없음
     });
 
   </script>
