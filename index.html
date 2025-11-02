@@ -61,7 +61,7 @@
 <body>
     <h1>수세 메모용</h1>
     <div class="container">
-        <!-- 입력 칸 11개 (기존 1개 + 추가 10개) -->
+        <!-- 입력 칸 19개 (기존 1개 + 추가 10개 + 추가 8개) -->
         <div class="inputs-column">
             <!-- JS로 생성, 기본값 있음 -->
         </div>
@@ -81,8 +81,8 @@
         </div>
     </div>
     <script>
-        // 입력창 11개 생성
-        const NUM_MEMO = 11;
+        // 입력창 19개 생성
+        const NUM_MEMO = 19;
         const localStorageKey = idx => `memoValue${idx}`;
         const inputsColumn = document.querySelector('.inputs-column');
         const displayColumn = document.getElementById('displayColumn');
@@ -169,6 +169,7 @@
     </script>
 </body>
 </html>
+
 
 
 
