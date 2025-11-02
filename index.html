@@ -9,8 +9,21 @@
             align-items: flex-start;
             margin-top: 30px;
         }
-        .input-box {
+        .inputs-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             margin-right: 20px;
+        }
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .display-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         .display-box {
             border: 1px solid #ccc;
@@ -22,7 +35,6 @@
         .btn-box {
             margin-left: 20px;
         }
-        /* 모달 스타일 */
         #modalOverlay {
             display: none;
             position: fixed;
@@ -49,10 +61,13 @@
 <body>
     <h1>수세 메모용</h1>
     <div class="container">
-        <div class="input-box">
-            <input type="text" id="memoInput" placeholder="메모를 입력하세요">
+        <!-- 입력 칸 11개 (기존 1개 + 추가 10개) -->
+        <div class="inputs-column">
+            <!-- JS로 생성, 기본값 있음 -->
         </div>
-        <div class="display-box" id="memoDisplay"></div>
+        <div class="display-column" id="displayColumn">
+            <!-- JS로 생성, 기본값 있음 -->
+        </div>
         <div class="btn-box">
             <button id="resetBtn">초기화</button>
         </div>
@@ -66,21 +81,58 @@
         </div>
     </div>
     <script>
-        // "데이터베이스" 역할을 하는 localStorage 사용
-        const memoInput = document.getElementById('memoInput');
-        const memoDisplay = document.getElementById('memoDisplay');
+        // 입력창 11개 생성
+        const NUM_MEMO = 11;
+        const localStorageKey = idx => `memoValue${idx}`;
+        const inputsColumn = document.querySelector('.inputs-column');
+        const displayColumn = document.getElementById('displayColumn');
+        let memoInputs = [];
+        let memoDisplays = [];
 
-        // 페이지 로드 시 저장된 값을 불러와서 표시
-        const savedMemo = localStorage.getItem('memoValue') || '';
-        memoInput.value = savedMemo;
-        memoDisplay.textContent = savedMemo;
+        // 동적 생성
+        for (let i = 0; i < NUM_MEMO; i++) {
+            // 입력
+            const inputRow = document.createElement('div');
+            inputRow.className = 'input-row';
 
-        memoInput.addEventListener('input', function() {
-            memoDisplay.textContent = memoInput.value;
-            localStorage.setItem('memoValue', memoInput.value);
-        });
+            const label = document.createElement('label');
+            label.textContent = `메모${i+1}`;
+            label.htmlFor = `memoInput${i}`;
+            label.style.minWidth = '48px';
 
-        // 초기화 및 모달 관련
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `memoInput${i}`;
+            input.placeholder = `메모를 입력하세요`;
+            input.autocomplete = 'off';
+
+            inputRow.appendChild(label);
+            inputRow.appendChild(input);
+            inputsColumn.appendChild(inputRow);
+
+            memoInputs.push(input);
+
+            // 표시 박스
+            const displayBox = document.createElement('div');
+            displayBox.className = 'display-box';
+            displayBox.id = `memoDisplay${i}`;
+            displayColumn.appendChild(displayBox);
+
+            memoDisplays.push(displayBox);
+
+            // localStorage 값 불러오기
+            const savedValue = localStorage.getItem(localStorageKey(i)) || '';
+            input.value = savedValue;
+            displayBox.textContent = savedValue;
+
+            // 입력 이벤트 연결
+            input.addEventListener('input', function() {
+                displayBox.textContent = input.value;
+                localStorage.setItem(localStorageKey(i), input.value);
+            });
+        }
+
+        // 초기화 및 모달
         const resetBtn = document.getElementById('resetBtn');
         const modalOverlay = document.getElementById('modalOverlay');
         const yesBtn = document.getElementById('yesBtn');
@@ -92,9 +144,11 @@
 
         yesBtn.addEventListener('click', function() {
             // 입력값 및 박스 초기화, localStorage 초기화
-            memoInput.value = '';
-            memoDisplay.textContent = '';
-            localStorage.removeItem('memoValue');
+            for (let i = 0; i < NUM_MEMO; i++) {
+                memoInputs[i].value = '';
+                memoDisplays[i].textContent = '';
+                localStorage.removeItem(localStorageKey(i));
+            }
             modalOverlay.style.display = 'none';
         });
 
@@ -102,7 +156,6 @@
             modalOverlay.style.display = 'none';
         });
 
-        // ESC나 바깥 클릭 시 창 닫기 (optional, UX)
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
@@ -116,3 +169,7 @@
     </script>
 </body>
 </html>
+
+
+
+
