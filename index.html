@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>수세 메모용</title>
+  <title>수세 메모용2 2 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -396,6 +396,15 @@
     document.getElementById('resetBtn').addEventListener('click', function() {
       const confirmed = window.confirm("박스 안에 있는 모든 내용이 초기화 됩니다. 계속하시겠습니까?");
       if (confirmed) {
+        const password = window.prompt("초기화를 위해 비밀번호 4자리를 입력하세요.", "");
+        if (password === null) {
+          // 취소 눌렀을 때
+          return;
+        }
+        if (password !== "6318") {
+          alert("비밀번호가 일치하지 않습니다. 초기화가 취소됩니다.");
+          return;
+        }
         for (let id of memoIds) {
           document.getElementById(id).value = "";
         }
