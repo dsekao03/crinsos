@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -59,9 +60,6 @@
       background: #f8f8fc;
       transition: border 0.2s;
       height: 28px;
-      /* 폭도 작게: 최대한 줄이기(폭 자동조정) */
-      /* min-width: 60px; */
-      /* width: 100%;  // 모바일에서 늘어지도록 놔둠 */
     }
     input[type="text"]:focus {
       border: 1.5px solid #7a77ee;
@@ -193,17 +191,6 @@
           <input type="text" id="memo10" autocomplete="off">
         </div>
       </div>
-      <div class="memoinput-group">
-        <div class="group-title">메모 11 ~ 12</div>
-        <div>
-          <label for="memo11">메모 11</label>
-          <input type="text" id="memo11" autocomplete="off">
-        </div>
-        <div>
-          <label for="memo12">메모 12</label>
-          <input type="text" id="memo12" autocomplete="off">
-        </div>
-      </div>
       <div class="actions">
         <button id="resetBtn">초기화</button>
       </div>
@@ -220,8 +207,7 @@
     // 메모 필드 id 배열
     const memoIds = [
       "memo1", "memo2", "memo3", "memo4", "memo5",
-      "memo6", "memo7", "memo8", "memo9", "memo10",
-      "memo11", "memo12"
+      "memo6", "memo7", "memo8", "memo9", "memo10"
     ];
 
     // 건조 1 ~ 5 필드명 배열 (라벨링 용)
@@ -247,7 +233,7 @@
           if (i < 5) {
             labelText = `건조 ${i+1}`;
           } else {
-            labelText = `배합 ${i+1}`;
+            labelText = `배합 ${i-4}`;
           }
           resHtml += `<div><b>${labelText}:</b> ${val}</div>`;
         }
