@@ -19,15 +19,51 @@
             min-height: 36px;
             background: #f9f9f9;
         }
+        .btn-box {
+            margin-left: 20px;
+        }
+        /* 모달 스타일 */
+        #modalOverlay {
+            display: none;
+            position: fixed;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        #modal {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.13);
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        #modal button {
+            margin: 8px 20px 0 20px;
+            min-width: 60px;
+        }
     </style>
 </head>
 <body>
-    <h1>test 1</h1>
+    <h1>수세 메모용</h1>
     <div class="container">
         <div class="input-box">
             <input type="text" id="memoInput" placeholder="메모를 입력하세요">
         </div>
         <div class="display-box" id="memoDisplay"></div>
+        <div class="btn-box">
+            <button id="resetBtn">초기화</button>
+        </div>
+    </div>
+    <!-- 커스텀 모달 -->
+    <div id="modalOverlay">
+        <div id="modal">
+            <div id="modalMessage" style="margin-bottom: 15px;">박스 안에 있는 모든 내용이 초기화 됩니다.<br>진행하시겠습니까?</div>
+            <button id="yesBtn">예</button>
+            <button id="noBtn">아니오</button>
+        </div>
     </div>
     <script>
         // "데이터베이스" 역할을 하는 localStorage 사용
@@ -43,32 +79,40 @@
             memoDisplay.textContent = memoInput.value;
             localStorage.setItem('memoValue', memoInput.value);
         });
-    </script>
 
-        <h1>A 건조시간</h1>
-    <div class="container">
-        <div class="input-box">
-            <input type="text" id="memoInput2" placeholder="메모를 입력하세요">
-        </div>
-        <div class="display-box" id="memoDisplay2"></div>
-    </div>
-    <script>
-        // "데이터베이스" 역할을 하는 localStorage 사용
-        const memoInput2 = document.getElementById('memoInput2');
-        const memoDisplay2 = document.getElementById('memoDisplay2');
+        // 초기화 및 모달 관련
+        const resetBtn = document.getElementById('resetBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
 
-        // 페이지 로드 시 저장된 값을 불러와서 표시
-        const savedMemo2 = localStorage.getItem('memoValue2') || '';
-        memoInput2.value = savedMemo2;
-        memoDisplay2.textContent = savedMemo2;
+        resetBtn.addEventListener('click', function() {
+            modalOverlay.style.display = 'block';
+        });
 
-        memoInput2.addEventListener('input', function() {
-            memoDisplay2.textContent = memoInput2.value;
-            localStorage.setItem('memoValue2', memoInput2.value);
+        yesBtn.addEventListener('click', function() {
+            // 입력값 및 박스 초기화, localStorage 초기화
+            memoInput.value = '';
+            memoDisplay.textContent = '';
+            localStorage.removeItem('memoValue');
+            modalOverlay.style.display = 'none';
+        });
+
+        noBtn.addEventListener('click', function() {
+            modalOverlay.style.display = 'none';
+        });
+
+        // ESC나 바깥 클릭 시 창 닫기 (optional, UX)
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+            }
+        });
+        window.addEventListener('keydown', function(e) {
+            if (modalOverlay.style.display === 'block' && e.key === 'Escape') {
+                modalOverlay.style.display = 'none';
+            }
         });
     </script>
-    
 </body>
 </html>
-
-
