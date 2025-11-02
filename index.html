@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <h1>test 2</h1>
+    <h1>test 3</h1>
     <div class="container">
         <div class="input-box">
             <input type="text" id="memoInput" placeholder="메모를 입력하세요">
@@ -58,9 +58,9 @@
         const memoDisplay = document.getElementById('memoDisplay');
 
         // 페이지 로드 시 저장된 값을 불러와서 표시
-        const savedMemo = localStorage.getItem('memoValue') || '';
-        memoInput.value = savedMemo;
-        memoDisplay.textContent = savedMemo;
+        const savedMemo2 = localStorage.getItem('memoValue') || '';
+        memoInput.value = savedMemo2;
+        memoDisplay.textContent = savedMemo2;
 
         memoInput.addEventListener('input', function() {
             memoDisplay.textContent = memoInput.value;
