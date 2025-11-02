@@ -71,7 +71,7 @@
             margin: 8px 20px 0 20px;
             min-width: 60px;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1200px) {
             .container {
                 flex-direction: column;
                 gap: 40px;
@@ -113,6 +113,19 @@
             </div>
         </div>
 
+        <!-- 추가 오른쪽 메모 그룹 -->
+        <div class="memo-group" id="right2MemoGroup">
+            <div class="side-title">오른쪽 추가 메모</div>
+            <div class="memo-rows">
+                <div class="inputs-column" id="right2InputsColumn">
+                    <!-- JS로 생성 -->
+                </div>
+                <div class="displays-column" id="right2DisplaysColumn">
+                    <!-- JS로 생성 -->
+                </div>
+            </div>
+        </div>
+
         <!-- 초기화 버튼 -->
         <div class="btn-box">
             <button id="resetBtn">초기화</button>
@@ -135,16 +148,23 @@
         const leftDisplaysColumn = document.getElementById('leftDisplaysColumn');
         const rightInputsColumn  = document.getElementById('rightInputsColumn');
         const rightDisplaysColumn= document.getElementById('rightDisplaysColumn');
+        const right2InputsColumn = document.getElementById('right2InputsColumn');
+        const right2DisplaysColumn = document.getElementById('right2DisplaysColumn');
 
         let leftMemoInputs = [], leftMemoDisplays = [];
         let rightMemoInputs = [], rightMemoDisplays = [];
+        let right2MemoInputs = [], right2MemoDisplays = [];
 
-        // 왼쪽, 오른쪽 각각에 대해 생성
-        for (let side of ['left', 'right']) {
-            const inputsArr = side === 'left' ? leftMemoInputs : rightMemoInputs;
-            const displaysArr = side === 'left' ? leftMemoDisplays : rightMemoDisplays;
-            const inputsCol = side === 'left' ? leftInputsColumn : rightInputsColumn;
-            const displaysCol = side === 'left' ? leftDisplaysColumn : rightDisplaysColumn;
+        // 왼쪽, 오른쪽, 추가오른쪽 각각에 대해 생성
+        for (let side of ['left', 'right', 'right2']) {
+            const inputsArr = side === 'left'  ? leftMemoInputs :
+                              side === 'right' ? rightMemoInputs : right2MemoInputs;
+            const displaysArr = side === 'left'  ? leftMemoDisplays :
+                                side === 'right' ? rightMemoDisplays : right2MemoDisplays;
+            const inputsCol = side === 'left'  ? leftInputsColumn :
+                              side === 'right' ? rightInputsColumn : right2InputsColumn;
+            const displaysCol = side === 'left'  ? leftDisplaysColumn :
+                                side === 'right' ? rightDisplaysColumn : right2DisplaysColumn;
             for (let i = 0; i < NUM_MEMO; i++) {
                 // 키 생성 (localStorage key)
                 function genKey(idx) { return `memoValue_${side}_${idx}`; }
@@ -200,10 +220,12 @@
         });
 
         yesBtn.addEventListener('click', function() {
-            // 왼쪽/오른쪽 모두 초기화
-            for (let side of ['left', 'right']) {
-                const inputsArr = side === 'left' ? leftMemoInputs : rightMemoInputs;
-                const displaysArr = side === 'left' ? leftMemoDisplays : rightMemoDisplays;
+            // 모든 메모 칸 초기화
+            for (let side of ['left', 'right', 'right2']) {
+                const inputsArr = side === 'left' ? leftMemoInputs :
+                                 side === 'right' ? rightMemoInputs : right2MemoInputs;
+                const displaysArr = side === 'left' ? leftMemoDisplays :
+                                    side === 'right' ? rightMemoDisplays : right2MemoDisplays;
                 for (let i = 0; i < NUM_MEMO; i++) {
                     inputsArr[i].value = '';
                     displaysArr[i].textContent = '';
@@ -230,6 +252,7 @@
     </script>
 </body>
 </html>
+
 
 
 
