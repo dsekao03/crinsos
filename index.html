@@ -66,7 +66,8 @@
       margin-bottom: 2px;
     }
     .memo-small {
-      width: 54px !important;
+      min-width: 30px;
+      max-width: 96px;
       font-size: 0.93em !important;
       padding: 3px 6px !important;
       margin-right: 5px;
@@ -75,6 +76,16 @@
       border-radius: 5px;
       text-align: center;
       height: 32px !important;
+      resize: none;
+      box-sizing: border-box;
+    }
+    input[type="text"].memo-small {
+      width: auto !important;
+    }
+    input[type="text"].memo-auto {
+      min-width: 44px;
+      max-width: 260px;
+      width: auto;
     }
     input[type="text"] {
       padding: 4px 6px;
@@ -198,10 +209,12 @@
         width: 91px;
       }
       .memo-small {
-        width: 39px !important;
+        min-width: 22px;
+        max-width: 76px;
         font-size: 0.93em !important;
         padding: 2px 2px !important;
         height: 27px !important;
+        width: auto !important;
       }
       button {
         font-size: 0.98rem;
@@ -251,31 +264,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo1s" autocomplete="off" placeholder="소">
           <label for="memo1">건조 1</label>
-          <input type="text" id="memo1" autocomplete="off">
+          <input type="text" id="memo1" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check1">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo2s" autocomplete="off" placeholder="소">
           <label for="memo2">건조 2</label>
-          <input type="text" id="memo2" autocomplete="off">
+          <input type="text" id="memo2" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check2">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo3s" autocomplete="off" placeholder="소">
           <label for="memo3">건조 3</label>
-          <input type="text" id="memo3" autocomplete="off">
+          <input type="text" id="memo3" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check3">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo4s" autocomplete="off" placeholder="소">
           <label for="memo4">건조 4</label>
-          <input type="text" id="memo4" autocomplete="off">
+          <input type="text" id="memo4" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check4">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo5s" autocomplete="off" placeholder="소">
           <label for="memo5">건조 5</label>
-          <input type="text" id="memo5" autocomplete="off">
+          <input type="text" id="memo5" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check5">
         </div>
       </div>
@@ -284,31 +297,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo6s" autocomplete="off" placeholder="소">
           <label for="memo6">메모 6</label>
-          <input type="text" id="memo6" autocomplete="off">
+          <input type="text" id="memo6" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check6">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo7s" autocomplete="off" placeholder="소">
           <label for="memo7">메모 7</label>
-          <input type="text" id="memo7" autocomplete="off">
+          <input type="text" id="memo7" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check7">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo8s" autocomplete="off" placeholder="소">
           <label for="memo8">메모 8</label>
-          <input type="text" id="memo8" autocomplete="off">
+          <input type="text" id="memo8" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check8">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo9s" autocomplete="off" placeholder="소">
           <label for="memo9">메모 9</label>
-          <input type="text" id="memo9" autocomplete="off">
+          <input type="text" id="memo9" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check9">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo10s" autocomplete="off" placeholder="소">
           <label for="memo10">메모 10</label>
-          <input type="text" id="memo10" autocomplete="off">
+          <input type="text" id="memo10" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check10">
         </div>
       </div>
@@ -327,31 +340,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo11s" autocomplete="off" placeholder="소">
           <label for="memo11">건조 11</label>
-          <input type="text" id="memo11" autocomplete="off">
+          <input type="text" id="memo11" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check11">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo12s" autocomplete="off" placeholder="소">
           <label for="memo12">건조 12</label>
-          <input type="text" id="memo12" autocomplete="off">
+          <input type="text" id="memo12" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check12">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo13s" autocomplete="off" placeholder="소">
           <label for="memo13">건조 13</label>
-          <input type="text" id="memo13" autocomplete="off">
+          <input type="text" id="memo13" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check13">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo14s" autocomplete="off" placeholder="소">
           <label for="memo14">건조 14</label>
-          <input type="text" id="memo14" autocomplete="off">
+          <input type="text" id="memo14" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check14">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo15s" autocomplete="off" placeholder="소">
           <label for="memo15">건조 15</label>
-          <input type="text" id="memo15" autocomplete="off">
+          <input type="text" id="memo15" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check15">
         </div>
       </div>
@@ -360,31 +373,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo16s" autocomplete="off" placeholder="소">
           <label for="memo16">메모 16</label>
-          <input type="text" id="memo16" autocomplete="off">
+          <input type="text" id="memo16" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check16">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo17s" autocomplete="off" placeholder="소">
           <label for="memo17">메모 17</label>
-          <input type="text" id="memo17" autocomplete="off">
+          <input type="text" id="memo17" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check17">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo18s" autocomplete="off" placeholder="소">
           <label for="memo18">메모 18</label>
-          <input type="text" id="memo18" autocomplete="off">
+          <input type="text" id="memo18" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check18">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo19s" autocomplete="off" placeholder="소">
           <label for="memo19">메모 19</label>
-          <input type="text" id="memo19" autocomplete="off">
+          <input type="text" id="memo19" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check19">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo20s" autocomplete="off" placeholder="소">
           <label for="memo20">메모 20</label>
-          <input type="text" id="memo20" autocomplete="off">
+          <input type="text" id="memo20" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check20">
         </div>
       </div>
@@ -403,31 +416,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo21s" autocomplete="off" placeholder="소">
           <label for="memo21">건조 21</label>
-          <input type="text" id="memo21" autocomplete="off">
+          <input type="text" id="memo21" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check21">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo22s" autocomplete="off" placeholder="소">
           <label for="memo22">건조 22</label>
-          <input type="text" id="memo22" autocomplete="off">
+          <input type="text" id="memo22" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check22">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo23s" autocomplete="off" placeholder="소">
           <label for="memo23">건조 23</label>
-          <input type="text" id="memo23" autocomplete="off">
+          <input type="text" id="memo23" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check23">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo24s" autocomplete="off" placeholder="소">
           <label for="memo24">건조 24</label>
-          <input type="text" id="memo24" autocomplete="off">
+          <input type="text" id="memo24" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check24">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo25s" autocomplete="off" placeholder="소">
           <label for="memo25">건조 25</label>
-          <input type="text" id="memo25" autocomplete="off">
+          <input type="text" id="memo25" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check25">
         </div>
       </div>
@@ -436,31 +449,31 @@
         <div class="memoline">
           <input type="text" class="memo-small" id="memo26s" autocomplete="off" placeholder="소">
           <label for="memo26">메모 26</label>
-          <input type="text" id="memo26" autocomplete="off">
+          <input type="text" id="memo26" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check26">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo27s" autocomplete="off" placeholder="소">
           <label for="memo27">메모 27</label>
-          <input type="text" id="memo27" autocomplete="off">
+          <input type="text" id="memo27" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check27">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo28s" autocomplete="off" placeholder="소">
           <label for="memo28">메모 28</label>
-          <input type="text" id="memo28" autocomplete="off">
+          <input type="text" id="memo28" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check28">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo29s" autocomplete="off" placeholder="소">
           <label for="memo29">메모 29</label>
-          <input type="text" id="memo29" autocomplete="off">
+          <input type="text" id="memo29" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check29">
         </div>
         <div class="memoline">
           <input type="text" class="memo-small" id="memo30s" autocomplete="off" placeholder="소">
           <label for="memo30">메모 30</label>
-          <input type="text" id="memo30" autocomplete="off">
+          <input type="text" id="memo30" class="memo-auto" autocomplete="off">
           <input type="checkbox" class="memocheck" id="check30">
         </div>
       </div>
@@ -510,6 +523,33 @@
       {start: 10,  end: 19,  resultArea: 'resultArea2',  dryLabel: "건조", memoLabel: "배합"},
       {start: 20,  end: 29,  resultArea: 'resultArea3',  dryLabel: "건조", memoLabel: "배합"},
     ];
+
+    // 입력란(일반/소) 자동 사이즈 조절 함수
+    function autoResizeInput(el, pad = 8, min = 22, max = 260) {
+      // Create a hidden span to measure
+      if (!el._measureSpan) {
+        const span = document.createElement('span');
+        span.style.visibility = 'hidden';
+        span.style.position = 'fixed';
+        span.style.left = '-9999px';
+        span.style.top = '-9999px';
+        span.style.font = window.getComputedStyle(el).font;
+        span.style.fontSize = window.getComputedStyle(el).fontSize;
+        span.style.padding = window.getComputedStyle(el).padding;
+        span.style.letterSpacing = window.getComputedStyle(el).letterSpacing;
+        span.style.whiteSpace = 'pre';
+        span.style.fontFamily = window.getComputedStyle(el).fontFamily;
+        el._measureSpan = span;
+        document.body.appendChild(span);
+      }
+      const span = el._measureSpan;
+      let v = el.value || el.getAttribute('placeholder') || '';
+      span.textContent = v.replace(/ /g, "\u00A0");
+      let w = span.offsetWidth + pad;
+      w = Math.max(min, w);
+      w = Math.min(max, w);
+      el.style.width = w + "px";
+    }
 
     // DB Save/Load (전체 30 + 체크박스 + 소칸)
     function saveMemosToDB(memos, checks, memosSmall) {
@@ -572,6 +612,33 @@
       updateResultArea();
     }
 
+    // 입력란 자동 사이즈 이벤트 연결 (함수)
+    function addAutoResizeInputs() {
+      // 메모(일반)
+      for (let i = 0; i < memoIds.length; i++) {
+        const el = document.getElementById(memoIds[i]);
+        el.classList.add('memo-auto');
+        ["input", "change", "focus"].forEach(evt => {
+          el.addEventListener(evt, function() {
+            autoResizeInput(el, 20, 44, 260);
+          });
+        });
+        // 최초에도 세팅
+        autoResizeInput(el, 20, 44, 260);
+      }
+      // 메모(소)
+      for (let i = 0; i < memoSmallIds.length; i++) {
+        const el = document.getElementById(memoSmallIds[i]);
+        // class memo-small 추가되어 있음
+        ["input", "change", "focus"].forEach(evt => {
+          el.addEventListener(evt, function() {
+            autoResizeInput(el, 8, 22, 96);
+          });
+        });
+        autoResizeInput(el, 8, 22, 96);
+      }
+    }
+
     // 이벤트 연결
     for (let i = 0; i < memoIds.length; i++) {
       document.getElementById(memoIds[i]).addEventListener('input', saveAll);
@@ -590,6 +657,8 @@
         document.getElementById(memoSmallIds[i]).value = memosSmall[memoSmallIds[i]] || "";
       }
       updateResultArea();
+      // 입력란 사이즈 조정
+      addAutoResizeInputs();
     }
     loadAll();
 
@@ -612,9 +681,13 @@
           document.getElementById(memoSmallIds[i]).value = "";
         }
         saveAll();
+        addAutoResizeInputs();
       }
       // 아니오: 아무 일도 없음
     });
+
+    // 입력값 수동 복원(기존) 후에도 입력란 자동 크기 적용
+    window.addEventListener('DOMContentLoaded', addAutoResizeInputs);
 
   </script>
 </body>
