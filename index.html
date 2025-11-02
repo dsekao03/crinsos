@@ -255,7 +255,6 @@
   <div class="reset-top-center-wrap">
     <button id="resetBtn">초기화</button>
   </div>
-  <h1>수세 메모용</h1>
   <div class="container">
     <!-- 좌측 메모입력란 -->
     <div class="memo-section" id="memoSection1">
@@ -660,19 +659,10 @@
     }
     loadAll();
 
-    // 초기화 (맨위 버튼)
+    // 초기화 (맨위 버튼) - 비밀번호 입력 제거
     document.getElementById('resetBtn').addEventListener('click', function() {
       const confirmed = window.confirm("박스 안에 있는 모든 내용이 초기화 됩니다. 계속하시겠습니까?");
       if (confirmed) {
-        const password = window.prompt("초기화를 위해 비밀번호 4자리를 입력하세요.", "");
-        if (password === null) {
-          // 취소
-          return;
-        }
-        if (password !== "6318") {
-          alert("비밀번호가 일치하지 않습니다. 초기화가 취소됩니다.");
-          return;
-        }
         for (let i = 0; i < memoIds.length; i++) {
           document.getElementById(memoIds[i]).value = "";
           document.getElementById(checkIds[i]).checked = false;
