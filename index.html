@@ -280,7 +280,401 @@
         const NUM_MEMO = 12;
 
         // DOM 참조
+        const allInputsColumn = document.getElementById('allInputsColumn');
+        const resultBox = document.getElementById('resultBox');
 
+        let memoInputs = [];
+
+        // 입력 칸 동적으로 생성
+        for (let i = 0; i < NUM_MEMO; i++) {
+            // 키 생성 (localStorage key)
+            function genKey(idx) { return `memoValue_all_${idx}`; }
+
+            // 입력 칸과 라벨
+            const inputRow = document.createElement('div');
+            inputRow.className = 'input-row';
+
+            const label = document.createElement('label');
+            label.textContent = `메모${i+1}`;
+            label.htmlFor = `allMemoInput${i}`;
+            label.style.minWidth = '42px';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `allMemoInput${i}`;
+            input.placeholder = `메모 입력`;
+            input.autocomplete = 'off';
+            input.inputMode = 'text';
+
+            inputRow.appendChild(label);
+            inputRow.appendChild(input);
+            allInputsColumn.appendChild(inputRow);
+            memoInputs.push(input);
+
+            // localStorage 적용
+            const savedValue = localStorage.getItem(genKey(i)) || '';
+            input.value = savedValue;
+
+            // 입력 이벤트
+            input.addEventListener('input', function() {
+                localStorage.setItem(genKey(i), input.value);
+                renderResult();
+            });
+
+            // iOS 키보드 개선 위해 enter 시 키보드 숨김
+            input.addEventListener('keydown', function(e){
+                if(e.key==='Enter') {
+                    input.blur();
+                }
+            });
+        }
+
+        // 결과 출력
+        function renderResult() {
+            // 입력된 값들을 모두 취합(빈 값 제외)
+            const memos = memoInputs.map(i => i.value).filter(v=>v.trim().length>0);
+            resultBox.innerHTML = memos.length > 0
+                ? memos.map((v,i)=> `<div><b>${i+1}.</b> ${v}</div>`).join('')
+                : "<span style='color:#bdcbe1;'>입력된 메모가 없습니다.</span>";
+        }
+
+        // 최초 렌더링
+        renderResult();
+
+        // 초기화 및 모달
+        const resetBtn = document.getElementById('resetBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        resetBtn.addEventListener('click', function() {
+            modalOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        yesBtn.addEventListener('click', function() {
+            // 모든 메모 칸 초기화
+            for(let i=0;i<NUM_MEMO;i++) {
+                memoInputs[i].value = '';
+                localStorage.removeItem(`memoValue_all_${i}`);
+            }
+            renderResult();
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+
+        noBtn.addEventListener('click', function() {
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+        window.addEventListener('keydown', function(e) {
+            if (modalOverlay.style.display === 'block' && e.key === 'Escape') {
+                modalOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // 모바일에서 박스 간격 조정/자동 scrollIntoView
+        function adjustForMobile() {
+            if(window.innerWidth <= 900) {
+                document.querySelectorAll('input[type="text"]').forEach(inp => {
+                    inp.addEventListener('focus', function(){
+                        setTimeout(function() {
+                            inp.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+                        }, 210);
+                    });
+                });
+            }
+        }
+        adjustForMobile();
+        window.addEventListener('resize', adjustForMobile);
+
+        // 입력값 변동시 결과 갱신
+        memoInputs.forEach(input => {
+            input.addEventListener('input', renderResult);
+        });
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>수세 메모용</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      margin: 40px 10px;
+    }
+    .memo-section {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #ddd;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      width: 310px;
+      min-width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: -2px;
+    }
+    .memoinput-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    label {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: #444;
+    }
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #bbb;
+      border-radius: 5px;
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 2px;
+      background: #f8f8fc;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus {
+      border: 1.5px solid #7a77ee;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 10px;
+    }
+    button {
+      padding: 8px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      background: #7a77ee;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #5956d2;
+    }
+    .result-area {
+      padding: 1rem;
+      border-radius: 8px;
+      min-height: 100px;
+      margin-top: 10px;
+      background: #fafbfc;
+      box-shadow: 0 1px 6px #eee;
+      color: #222;
+      word-break: break-all;
+      font-size: 1.12rem;
+    }
+    .group-title {
+      font-weight: bold;
+      color: #325;
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      letter-spacing: -1px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2rem;
+        margin: 24px 2vw;
+      }
+      .memo-section {
+        width: 100%;
+        min-width: unset;
+        margin: 0 auto;
+        max-width: 480px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        margin: 8px 2vw;
+      }
+      .memo-section {
+        padding: 1rem 0.7rem 1.2rem 0.7rem;
+        font-size: 0.98rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>수세 메모용</h1>
+  <div class="container">
+    <!-- 좌측 메모입력란 -->
+    <div class="memo-section" id="memoSection1">
+      <div class="memoinput-group">
+        <div class="group-title">메모 1 ~ 5</div>
+        <div>
+          <label for="memo1">메모 1</label>
+          <input type="text" id="memo1" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo2">메모 2</label>
+          <input type="text" id="memo2" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo3">메모 3</label>
+          <input type="text" id="memo3" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo4">메모 4</label>
+          <input type="text" id="memo4" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo5">메모 5</label>
+          <input type="text" id="memo5" autocomplete="off">
+        </div>
+      </div>
+      <div class="memoinput-group">
+        <div class="group-title">메모 6 ~ 10</div>
+        <div>
+          <label for="memo6">메모 6</label>
+          <input type="text" id="memo6" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo7">메모 7</label>
+          <input type="text" id="memo7" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo8">메모 8</label>
+          <input type="text" id="memo8" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo9">메모 9</label>
+          <input type="text" id="memo9" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo10">메모 10</label>
+          <input type="text" id="memo10" autocomplete="off">
+        </div>
+      </div>
+      <div class="memoinput-group">
+        <div class="group-title">메모 11 ~ 12</div>
+        <div>
+          <label for="memo11">메모 11</label>
+          <input type="text" id="memo11" autocomplete="off">
+        </div>
+        <div>
+          <label for="memo12">메모 12</label>
+          <input type="text" id="memo12" autocomplete="off">
+        </div>
+      </div>
+      <div class="actions">
+        <button id="resetBtn">초기화</button>
+      </div>
+    </div>
+
+    <!-- 결과 박스 (모든 입력 메모 표시, 우측 고정) -->
+    <div class="memo-section">
+      <div class="group-title">메모 결과</div>
+      <div class="result-area" id="resultArea"></div>
+    </div>
+  </div>
+
+  <script>
+    // 메모 필드 id 배열
+    const memoIds = [
+      "memo1", "memo2", "memo3", "memo4", "memo5",
+      "memo6", "memo7", "memo8", "memo9", "memo10",
+      "memo11", "memo12"
+    ];
+
+    // 데이터베이스: localStorage 사용
+    function saveMemosToDB(memos) {
+      localStorage.setItem('suse_memo_data', JSON.stringify(memos));
+    }
+    function loadMemosFromDB() {
+      const val = localStorage.getItem('suse_memo_data');
+      if (val) return JSON.parse(val);
+      return {};
+    }
+
+    // 입력값 반영
+    function updateResultArea() {
+      let resHtml = "";
+      for (let i = 0; i < memoIds.length; i++) {
+        const val = document.getElementById(memoIds[i]).value.trim();
+        if (val) {
+          resHtml += `<div><b>메모 ${i+1}:</b> ${val}</div>`;
+        }
+      }
+      document.getElementById('resultArea').innerHTML = resHtml || "<div style='color:#aaa'>입력된 메모가 없습니다.</div>";
+    }
+
+    // 입력값 저장
+    function saveAll() {
+      let memos = {};
+      for (let id of memoIds) {
+        memos[id] = document.getElementById(id).value;
+      }
+      saveMemosToDB(memos);
+      updateResultArea();
+    }
+
+    // 이벤트 연결
+    for (let id of memoIds) {
+      document.getElementById(id).addEventListener('input', saveAll);
+    }
+
+    // 초기 로딩
+    function loadAll() {
+      const memos = loadMemosFromDB();
+      for (let id of memoIds) {
+        document.getElementById(id).value = memos[id] || "";
+      }
+      updateResultArea();
+    }
+    loadAll();
+
+    // 초기화
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      const confirmed = window.confirm("박스 안에 있는 모든 내용이 초기화 됩니다. 계속하시겠습니까?");
+      if (confirmed) {
+        for (let id of memoIds) {
+          document.getElementById(id).value = "";
+        }
+        saveAll();
+      }
+      // 아니오: 아무 일도 없음(메세지 창만 닫힘)
+    });
+
+  </script>
+</body>
+</html>
 
 
 
