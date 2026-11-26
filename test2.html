@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<title>시간 계산</title>
+<style>
+  :root{
+    --yellow:#ffff00; --green:#00b050; --gray:#7f7f7f; --red:#ff0000;
+    --orange:#ffc000; --purple:#7030a0; --blue:#4472c4;
+    --edge:#1f3864; --line:#111;
+    /* PC 기본 크기 */
+    --box-h:50px; --box-fs:24px; --label-fs:30px; --gap:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    background:#e9ebef;color:#000;padding:24px 12px;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .app{max-width:760px;margin:0 auto;background:#fff;border:2px solid var(--line)}
+
+  /* ── 상단 ── */
+  header{
+    position:sticky;top:0;z-index:5;background:#fff;
+    display:grid;grid-template-columns:minmax(0,1fr) auto;
+    border-bottom:2px solid var(--line);
+  }
+  .settings{border-right:2px solid var(--line);min-width:0}
+  .hrow{display:flex;align-items:center;gap:var(--gap);padding:10px 20px}
+  .hrow + .hrow{border-top:2px solid var(--line)}
+  .label{font-size:var(--label-fs);white-space:nowrap;line-height:1}
+  .hrow .time{flex:0 1 190px}
+  .actions{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 28px}
+
+  button{
+    font:inherit;cursor:pointer;touch-action:manipulation;
+    border:1.5px solid var(--edge);border-radius:2px;
+  }
+  button:active{filter:brightness(.88)}
+  .blue{background:var(--blue);color:#fff}
+  .apply{height:var(--box-h);padding:0 18px;font-size:22px;white-space:nowrap;flex:0 0 auto}
+  .apply.dirty{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--red)}
+  .action{width:90px;height:80px;font-size:18px;white-space:nowrap}
+  .pick{height:var(--box-h);font-size:var(--box-fs);font-weight:700;white-space:nowrap;min-width:0}
+  #cycleBtn{background:var(--orange);color:#000;flex:0 1 110px}
+  #lineBtn{background:var(--purple);color:#fff;flex:0 1 120px}
+  #lineLabel{margin-left:auto}
+
+  /* ── 상태 안내 ── */
+  #status{font-size:14px;color:#444;padding:8px 20px 0;text-align:center;line-height:1.4;word-break:keep-all}
+  #status.warn{color:#c00000}
+
+  /* ── 시간표 ── */
+  main{padding:10px 40px 24px}
+  .row{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr) minmax(0,2.3fr);
+    column-gap:24px;align-items:center;margin-top:8px;
+  }
+  .time{display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);column-gap:3px;align-items:center;min-width:0}
+  .box{
+    display:block;width:100%;min-width:0;height:var(--box-h);
+    border:1.5px solid var(--edge);border-radius:2px;
+    font:700 var(--box-fs)/1 inherit;font-family:inherit;font-variant-numeric:tabular-nums;
+    text-align:center;color:#000;-webkit-appearance:none;appearance:none;
+    touch-action:manipulation;scroll-margin:150px 0 40px;
+  }
+  .box:focus{outline:3px solid #0057ff;outline-offset:1px;position:relative;z-index:1}
+  .green{background:var(--green)}
+  .yellow{background:var(--yellow)}
