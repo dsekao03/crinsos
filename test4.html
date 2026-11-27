@@ -238,7 +238,7 @@ textarea{display:block;width:100%;height:240px;resize:vertical;padding:14px;bord
 </dialog>
 
 <dialog id="share-dialog" aria-labelledby="share-title">
-  <h2 id="share-title">시간표 공유</h2>
+  <h2 id="share-title">배출 시간 공유</h2>
   <textarea id="share-text" readonly aria-label="공유할 내용"></textarea>
   <div class="dialog-buttons">
     <button type="button" class="btn plain" data-close>닫기</button>
@@ -589,8 +589,7 @@ textarea{display:block;width:100%;height:240px;resize:vertical;padding:14px;bord
   function shareText() {
     var c = calculate();
     var lines = [
-      (state.line ? state.line + '라인' : '라인 미선택') + ' 배출 시간',
-      
+      (state.line ? state.line + '라인' : '라인 미선택') + ' 배출 시간'
     ];
     var count = 0;
     for (var i = 0; i < ROWS; i++) {
