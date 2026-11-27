@@ -428,7 +428,7 @@ textarea{display:block;width:100%;height:240px;resize:vertical;padding:14px;bord
   for (var i = 0; i < ROWS; i++) {
     var n = (i + 1) + '번째 줄 ';
     html += '<li class="row">' +
-      '<input class="num" id="g-' + i + '" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" maxlength="12" aria-label="' + n + '번호"' + (i === 0 ? ' placeholder="번호"' : '') + '>';
+      '<input class="num" id="g-' + i + '" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" maxlength="12" aria-label="' + n + '번호"' + (i === 0 ? ' placeholder="로트"' : '') + '>';
     if (i === 0) {
       html += '<div class="pair t-gray" id="start-pair">' + timeInput('start-h', n + '시작 시', '시') + COLON + timeInput('start-m', n + '시작 분', '분') + '</div>' +
         '<div class="pair t-red" id="result-pair"><output class="cell" id="result-h" aria-label="' + n + '계산 결과 시"></output>' + COLON +
