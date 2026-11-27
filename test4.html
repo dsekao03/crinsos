@@ -589,9 +589,8 @@ textarea{display:block;width:100%;height:240px;resize:vertical;padding:14px;bord
   function shareText() {
     var c = calculate();
     var lines = [
-      (state.line ? state.line + '라인' : '라인 미선택') + ' 시간표',
-      '배출 ' + fmt(state.discharge) + ' / 주기 ' + (state.cycle === null ? '미선택' : state.cycle),
-      ''
+      (state.line ? state.line + '라인' : '라인 미선택') + ' 배출 시간',
+      
     ];
     var count = 0;
     for (var i = 0; i < ROWS; i++) {
